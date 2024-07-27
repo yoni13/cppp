@@ -1,33 +1,33 @@
-people = 8
+people = 88
 
-bomb_pattern = 3
+bomb_pattern =  3
 
-max_bomb = 6
+max_bomb = 30
 
 ppls = []
 
 for i in range(people):
     ppls.append(i+1)
-# [1,2,3,4,5]
 
-# list = [1,3,5]
-# list.pop(0) [3,5]
 lucknum = 0
-for i in range(max_bomb):
+last_rm_num = 0
+#print(ppls)
 
+for i in range(max_bomb):
     if len(ppls) == 1:
-        print(ppls[0])
         break
 
-    bomb = bomb_pattern+i
+    bomb = bomb_pattern+last_rm_num
+    if last_rm_num != 0:
+        bomb -= 1
 
-    if bomb_pattern+i>len(ppls):
-        for a in range((bomb_pattern+i)//len(ppls)):
-            bomb -= len(ppls)
-        #print(bomb)
+    # len is 1 based
+    if bomb>=len(ppls):
+        bomb = bomb%len(ppls)
+    #print(bomb)
     
-    lucknum = ppls[bomb-1]
-    ppls.pop(bomb-1)
-    print(ppls)
+    last_rm_num = bomb
+    lucknum = ppls[bomb]
+    del ppls[bomb-1]
 
 print(lucknum)
